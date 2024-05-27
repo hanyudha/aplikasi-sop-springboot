@@ -1,0 +1,167 @@
+############################################# TABEL SOP ################################################
+mysql> select * from sop where nomor_sop = 'PP 05';
++--------+-----------+-----------+---------------+------------+-------------+---------------+----------+
+| id_sop | id_bidang | nomor_sop | tgl_pembuatan | tgl_revisi | tgl_efektif | disahkan_oleh | nama_sop |
++--------+-----------+-----------+---------------+------------+-------------+---------------+----------+
+|   1989 | PP        | PP 05     | 0000-00-00    | 0000-00-00 | 0000-00-00  |               |          |
++--------+-----------+-----------+---------------+------------+-------------+---------------+----------+
+
+############################################# TABEL SOP_RELASI #########################################
+mysql> select * from sop_relasi where id_sop = '1989';
++-----------+--------+-------------------+---------------------+--------------+-------------+---------+
+| id_relasi | id_sop | id_flowchart_asal | id_flowchart_tujuan | port_asal    | port_tujuan | label   |
++-----------+--------+-------------------+---------------------+--------------+-------------+---------+
+|     14967 |   1989 |             17348 |               17349 | RightMiddle  | LeftMiddle  | Label+3 |
+|     14968 |   1989 |             17349 |               17350 | RightMiddle  | LeftMiddle  | Label+3 |
+|     14969 |   1989 |             17350 |               17351 | BottomCenter | TopCenter   | Label+3 |
++-----------+--------+-------------------+---------------------+--------------+-------------+---------+
+
+################################## TABEL SOP_FLOWCHART ################################################
+mysql> select * from sop_flowchart where id_sop = '1989';
++--------------+--------+--------------+--------------+-----------------+
+| id_flowchart | id_sop | id_pelaksana | id_aktivitas | nama_flowchart  |
++--------------+--------+--------------+--------------+-----------------+
+|        17348 |   1989 |         7544 |        14502 | sym-terminator  |
+|        17349 |   1989 |         7545 |        14502 | sym-prosessing  |
+|        17350 |   1989 |         7546 |        14502 | sym-decision    |
+|        17351 |   1989 |         7544 |        14503 | sym-connector-2 |
++--------------+--------+--------------+--------------+-----------------+
+
+###################################### TABEL SOP_PELAKSANA #############################################
+mysql> select * from sop_pelaksana where id_sop = '1989';
++--------------+------------------+--------+
+| id_pelaksana | nama_pelaksana   | id_sop |
++--------------+------------------+--------+
+|         7544 | Pranata Komputer |   1989 |
+|         7545 | Akademik         |   1989 |
+|         7546 | Keuangan         |   1989 |
++--------------+------------------+--------+
+
+###################################### TABEL SOP_AKTIVITAS #############################################
+mysql> select * from sop_aktivitas where id_sop = '1989';
++--------------+--------+-------------+---------------+----------+---------+------------------------+
+| id_aktivitas | id_sop | aktivitas   | persyaratan   | waktu    | output  | keterangan             |
++--------------+--------+-------------+---------------+----------+---------+------------------------+
+|        14502 |   1989 | aktivitas 1 | Persyaratan 1 | 30 Menit | Dokumen | Keterangan Aktivitas 1 |
+|        14503 |   1989 | Aktivitas 2 |               |          |         |                        |
++--------------+--------+-------------+---------------+----------+---------+------------------------+
+
+
+###################################### TABEL TBL_BAGAN #################################################
+mysql> select * from tbl_bagan;
++----------+-----------------------------------+---------------+
+| id_bagan | nama_bagan                        | bidang        |
++----------+-----------------------------------+---------------+
+|        1 | Bagian Akademik                   | akademik      |
+|        2 | Bagian Keuangan dan Akuntansi     | keuangan      |
+|        3 | Bagian Kemahasiswaan              | kemahasiswaan |
+|        4 | Bagian Kepegawaian                | kepegawaian   |
+|        5 | Bagian Kerjasama dan Kelembagaan  | kerjasama     |
+|        6 | Bagian Perencanaan                | perencanaan   |
+|        7 | Bagian Umum                       | bagumum       |
+|        8 | Fakultas Adab dan Humaniora       | adab          |
+|        9 | Fakultas Dakwah dan Komunikasi    | dakwah        |
+|       10 | Fakultas Ekonomi dan Bisnis Islam | febi          |
+|       11 | Fakultas Ilmu Kesehatan           | kesehatan     |
+|       12 | Fakultas Syariah dan Hukum        | syariah       |
+|       13 | Fakultas Sains dan Teknologi      | saintek       |
+|       14 | Fakultas Tarbiyah dan Keguruan    | tarbiyah      |
+|       15 | Fakultas Ushuluddin dan Filsafat  | ushuluddin    |
+|       16 | Kopertais                         | kopertais     |
+|       17 | LP2M                              | lp2m          |
+|       18 | LPM                               | lpm           |
+|       19 | Pejabat Pengadaan                 | pp            |
+|       20 | Panitia Penerima Hasil Pekerjaan  | pphp          |
+|       21 | Pejabat Pembuat Komitmen          | ppk           |
+|       22 | Pascasarjana                      | pasca         |
+|       23 | SPI                               | spi           |
+|       24 | Unit Layanan Pengadaan            | ulp           |
+|       25 | UPT                               | upt           |
+|       28 | ROOT                              | root          |
++----------+-----------------------------------+---------------+
+
+
+###################################### TABEL TBL_BIDANG #################################################
+mysql> select * from tbl_bidang;
++-----------+----------------------------------------------------------+-----------+-----------------------------------+------------------------+---------------+
+| id_bidang | nama                                                     | deskripsi | keterangan                        | kode_bidang            | bidang        |
++-----------+----------------------------------------------------------+-----------+-----------------------------------+------------------------+---------------+
+| BA01      | Pengelolaan Informasi Akademik                           |           | Bagian Akademik                   | rektorat_aaak_ba_pia   | akademik      |
+| BA02      | Administrasi Akademik                                    |           | Bagian Akademik                   | rektorat_aaak_ba_aa    | akademik      |
+| BA03      | Layanan Akademik                                         |           | Bagian Akademik                   | rektorat_aaak_ba_la    | akademik      |
+| BKA01     | Verifikasi, Akuntansi & Pelaporan Anggara                |           | Bagian Keuangan dan Akuntansi     | rektorat_aupk_bka_vapa | keuangan      |
+| BKA02     | Pelaksana Anggaran & Perbendaharaan                      |           | Bagian Keuangan dan Akuntansi     | rektorat_aupk_bka_pap  | keuangan      |
+| BKEM01    | Kemahasiswaan                                            |           | Bagian Kemahasiswaan              | rektorat_aaak_bk_k     | kemahasiswaan |
+| BKEM02    | Alumni                                                   |           | Bagian Kemahasiswaan              | rektorat_aaak_bk_a     | kemahasiswaan |
+| BKEP01    | Kepegawaian                                              |           | Bagian Kepegawaian                | rektorat_aupk_bkep_kep | kepegawaian   |
+| BKEP02    | Organisasi dan Perundang-undangan                        |           | Bagian Kepegawaian                | rektorat_aupk_bkep_opu | kepegawaian   |
+| BKK01     | Bina PTIS                                                |           | Bagian Kerjasama dan Kelembagaan  | rektorat_aaak_bkk_ptis | kerjasama     |
+| BKK02     | Kerjasama dan Pengembangan Lembaga                       |           | Bagian Kerjasama dan Kelembagaan  | rektorat_aaak_bkk_kpl  | kerjasama     |
+| BP01      | Penyusunan evaluasi, pelaporan program dan Anggaran      |           | Bagian Perencanaan                | rektorat_aupk_bp_peppa | perencanaan   |
+| BP02      | Data & Informasi                                         |           | Bagian Perencanaan                | rektorat_aupk_bp_di    | perencanaan   |
+| BU01      | Tata Usaha                                               |           | Bagian Umum                       | rektorat_aupk_bu_tu    | bagumum       |
+| BU02      | Rumah Tangga                                             |           | Bagian Umum                       | rektorat_aupk_bu_rt    | bagumum       |
+| BU03      | Humas, Dokumentasi, dan Publikasi                        |           | Bagian Umum                       | rektorat_aupk_bu_hdp   | bagumum       |
+| FAH01     | Akademik                                                 |           | Fakultas Adab dan Humaniora       | fah_a                  | adab          |
+| FAH02     | IBMN                                                     |           | Fakultas Adab dan Humaniora       | fah_au_ibmn            | adab          |
+| FAH03     | Kepegawaian                                              |           | Fakultas Adab dan Humaniora       | fah_au_k               | adab          |
+| FAH04     | Akuntansi dan Keuangan                                   |           | Fakultas Adab dan Humaniora       | fah_au_ak              | adab          |
+| FDK01     | Akademik                                                 |           | Fakultas Dakwah dan Komunikasi    | fdk_a                  | dakwah        |
+| FDK02     | IBMN                                                     |           | Fakultas Dakwah dan Komunikasi    | fdk_au_ibmn            | dakwah        |
+| FDK03     | Kepegawaian                                              |           | Fakultas Dakwah dan Komunikasi    | fdk_au_k               | dakwah        |
+| FDK04     | Akuntansi dan Keuangan                                   |           | Fakultas Dakwah dan Komunikasi    | fdk_au_ak              | dakwah        |
+| FEBI01    | Akademik                                                 |           | Fakultas Ekonomi dan Bisnis Islam | febi_a                 | febi          |
+| FEBI02    | IBMN                                                     |           | Fakultas Ekonomi dan Bisnis Islam | febi_au_ibmn           | febi          |
+| FEBI03    | Kepegawaian                                              |           | Fakultas Ekonomi dan Bisnis Islam | febi_au_k              | febi          |
+| FEBI04    | Akuntansi dan Keuangan                                   |           | Fakultas Ekonomi dan Bisnis Islam | febi_au_ak             | febi          |
+| FIK01     | Akademik                                                 |           | Fakultas Ilmu Kesehatan           | fik_a                  | kesehatan     |
+| FIK02     | IBMN                                                     |           | Fakultas Ilmu Kesehatan           | fik_au_ibmn            | kesehatan     |
+| FIK03     | Kepegawaian                                              |           | Fakultas Ilmu Kesehatan           | fik_au_k               | kesehatan     |
+| FIK04     | Akuntansi dan Keuangan                                   |           | Fakultas Ilmu Kesehatan           | fik_au_ak              | kesehatan     |
+| FSH01     | Akademik                                                 |           | Fakultas Syariah dan Hukum        | fsh_a                  | syariah       |
+| FSH02     | IBMN                                                     |           | Fakultas Syariah dan Hukum        | fsh_au_ibmn            | syariah       |
+| FSH03     | Kepegawaian                                              |           | Fakultas Syariah dan Hukum        | fsh_au_k               | syariah       |
+| FSH04     | Akuntansi dan Keuangan                                   |           | Fakultas Syariah dan Hukum        | fsh_ak                 | syariah       |
+| FST01     | Akademik                                                 |           | Fakultas Sains dan Teknologi      | fst_a                  | saintek       |
+| FST02     | IBMN                                                     |           | Fakultas Sains dan Teknologi      | fst_au_ibmn            | saintek       |
+| FST03     | Kepegawaian                                              |           | Fakultas Sains dan Teknologi      | fst_au_k               | saintek       |
+| FST04     | Akuntansi dan Keuangan                                   |           | Fakultas Sains dan Teknologi      | fst_au_ak              | saintek       |
+| FTG01     | Akademik                                                 |           | Fakultas Tarbiyah dan Keguruan    | ftk_a                  | tarbiyah      |
+| FTG02     | IBMN                                                     |           | Fakultas Tarbiyah dan Keguruan    | ftk_au_ibmn            | tarbiyah      |
+| FTG03     | Kepegawaian                                              |           | Fakultas Tarbiyah dan Keguruan    | ftk_au_k               | tarbiyah      |
+| FTG04     | Akuntansi dan Keuangan                                   |           | Fakultas Tarbiyah dan Keguruan    | ftk_ak                 | tarbiyah      |
+| FUF01     | Akademik                                                 |           | Fakultas Ushuluddin dan Filsafat  | fuf_a                  | ushuluddin    |
+| FUF02     | IBMN                                                     |           | Fakultas Ushuluddin dan Filsafat  | fuf_au_ibmn            | ushuluddin    |
+| FUF03     | Kepegawaian                                              |           | Fakultas Ushuluddin dan Filsafat  | fuf_au_k               | ushuluddin    |
+| FUF04     | Akuntansi dan Keuangan                                   |           | Fakultas Ushuluddin dan Filsafat  | fuf_au_ak              | ushuluddin    |
+| KOP01     | Akademik, Sarana Prasarana & Kemahasiswaan               |           | Kopertais                         | kop_a                  | kopertais     |
+| KOP02     | Ketenagaan, Kelembagaan & Keuangan                       |           | Kopertais                         | kop_k                  | kopertais     |
+| LP2M01    | Tata Usaha                                               |           | LP2M                              | lembaga_lp2m_tu        | lp2m          |
+| LP2M02    | Pusat Penelitian & Penerbitan                            |           | LP2M                              | lembaga_lp2m_ppp       | lp2m          |
+| LP2M03    | Pusat Pengabdian pada Masyarakat                         |           | LP2M                              | lembaga_lp2m_ppm       | lp2m          |
+| LP2M04    | Pusat Studi Gender & Anak                                |           | LP2M                              | lembaga_lp2m_psga      | lp2m          |
+| LP2M05    | Pusat Kajian Islam, Sains & Teknologi                    |           | LP2M                              | lembaga_lp2m_pkist     | lp2m          |
+| LP2M06    | Pusat Peradaban Islam                                    |           | LP2M                              | lembaga_lp2m_ppi       | lp2m          |
+| LPM01     | Tata Usaha                                               |           | LPM                               | lembaga_lpm_tu         | lpm           |
+| LPM02     | Pusat Peningkatan Standar Mutu                           |           | LPM                               | lembaga_lpm_ppsm       | lpm           |
+| LPM03     | Pusat Audit dan Pengendalian Mutu                        |           | LPM                               | lembaga_lpm_papm       | lpm           |
+| PP        | Pejabat Pengadaan                                        |           | Pejabat Pengadaan                 | rektorat_pp            | pp            |
+| PPHP      | Panitia Penerimaan Hasil Pekerjaan                       |           | Panitia Penerima Hasil Pekerjaan  | rektorat_pphp          | pphp          |
+| PPK       | Pejabat Pembuat Komitmen                                 |           | Pejabat Pembuat Komitmen          | rektorat_ppk           | ppk           |
+| PS01      | Akademik                                                 |           | Pascasarjana                      | pasca_a                | pasca         |
+| PS02      | Akuntansi dan Keuangan                                   |           | Pascasarjana                      | pasca_ak               | pasca         |
+| PS03      | Kemahasiswaan                                            |           | Pascasarjana                      | pasca_k                | pasca         |
+| PS04      | Bagian Umum                                              |           | Pascasarjana                      | pasca_bu               | pasca         |
+| PS05      | Bagian Pendataan                                         |           | Pascasarjana                      | pasca_bp               | pasca         |
+| SPI01     | Bidang Pre-Audit dan Audit Kepatuhan                     |           | SPI                               | spi_bpaak              | spi           |
+| SPI02     | Bidang Reviu Laporan Kepatuhan dan Pengendalian Internal |           | SPI                               | spi_brlkpi             | spi           |
+| SPI03     | Bidang Audit Aset dan Audit Khusus                       |           | SPI                               | spi_baaak              | spi           |
+| ULP       | Unit Layanan Pengadaan                                   |           | Unit Layanan Pengadaan            | rektorat_ulp           | ulp           |
+| UPT01     | Perpustakaan Syekh Yusuf                                 |           | UPT                               | upt_psy                | upt           |
+| UPT02     | Pusat Teknologi Informasi dan Pangkalan Data             |           | UPT                               | upt_ptipd              | upt           |
+| UPT03     | Pusat Pengembangan Bisnis                                |           | UPT                               | upt_ppbis              | upt           |
+| UPT04     | Pusat Pengembangan Bahasa                                |           | UPT                               | upt_ppb                | upt           |
+| UPT05     | Urusan Internasional                                     |           | UPT                               | upt_ui                 | upt           |
+| UPT06     | Penegakan Kode Etik                                      |           | UPT                               | upt_pke                | upt           |
+| UPT07     | CBP                                                      |           | UPT                               | upt_cbp                | upt           |
++-----------+----------------------------------------------------------+-----------+-----------------------------------+------------------------+---------------+
