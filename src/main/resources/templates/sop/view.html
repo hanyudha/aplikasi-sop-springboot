@@ -44,39 +44,65 @@
         </div>
     </div>
 </nav>
-<div class="card">
-    <div class="card-header">
-        View SOP
-    </div>
+<div class="container">
+    <div class="card my-2">
+        <div class="card-header">
+            View SOP
+        </div>
 
-    <div class="card-body">
-        <div class="mb-2">
-            <table class="table table-bordered table-striped">
-                <tbody>
-                <tr>
-                    <th>ID</th>
-                    <td>
-                        <span th:text="${sop.id}"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Title</th>
-                    <td>
-                        <span th:text="${sop.namaSop}"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Slug</th>
-                    <td>
-                        <span th:text="${sop.nomorSop}"></span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="card-body">
+            <div class="mb-2">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>
+                            <span th:text="${sop.id}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nomor SOP</th>
+                        <td>
+                            <span th:text="${sop.nomorSop}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>
+                            <span th:text="${sop.tglPembuatan}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Updated At</th>
+                        <td>
+                            <span th:text="${sop.tglRevisi}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Efektif At</th>
+                        <td>
+                            <span th:text="${sop.tglEfektif}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Disahkan Oleh</th>
+                        <td>
+                            <span th:text="${sop.disahkanOleh}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nama SOP</th>
+                        <td>
+                            <span th:text="${sop.namaSop}"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-            <a style="margin-top: 20px;" class="btn btn-default" th:href="@{/sop/list}">
-                Back to list
-            </a>
+                <a style="margin-top: 20px;" class="btn btn-secondary" th:href="@{/sop/list}">
+                    Back to list
+                </a>
+            </div>
         </div>
     </div>
 </div>
