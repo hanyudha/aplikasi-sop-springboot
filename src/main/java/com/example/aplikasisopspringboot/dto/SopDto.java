@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SopDto {
     private String id;
+    private String bidang;
     private String nomorSop;
     private LocalDateTime tglPembuatan;
     private LocalDateTime tglRevisi;

@@ -84,6 +84,15 @@
                            required>
                 </div>
 
+                <div class="form-group">
+                    <label for="id_bidang">Bidang / id Bidang*</label>
+                    <select id="id_bidang" class="form-control" th:field="*{bidang}" required>
+                        <th:block th:each="bidang : ${bidangList}">
+                            <option th:text="${bidang.nama}" th:value="${bidang.id}"/>
+                        </th:block>
+                    </select>
+                </div>
+
                 <div class="mt-4">
                     <input class="btn btn-success" type="submit" value="Save">
                     <a class="btn btn-secondary" th:href="@{/sop/list}">

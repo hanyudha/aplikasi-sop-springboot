@@ -1,7 +1,9 @@
 package com.example.aplikasisopspringboot.controller;
 
 
+import com.example.aplikasisopspringboot.dao.BidangDao;
 import com.example.aplikasisopspringboot.dao.SopDao;
+import com.example.aplikasisopspringboot.entity.Bidang;
 import com.example.aplikasisopspringboot.entity.Sop;
 import com.example.aplikasisopspringboot.service.SopService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -28,18 +31,29 @@ public class SopController{
     private SopService sopService;
     @Autowired
     private SopDao sopDao;
+    @Autowired
+    private BidangDao bidangDao;
+
+    @ModelAttribute
+    public void addAttributes(ModelMap model) {
+        List<Bidang> bidangList = bidangDao.findAll();
+        model.addAttribute("bidangList", bidangList);
+    }
 
     @GetMapping(value = {"/", "/list"})
     public String getList(ModelMap mm,
                           @RequestParam(value = "search", required = false) String search,
                           @PageableDefault(size = 10)Pageable page) {
         Page<Sop> result;
+        List<Bidang> bidangList = bidangDao.findAll();
         if (search != null && !search.isEmpty()) {
             result = sopService.getByNameAndPage(search, page);
+            mm.addAttribute("bidangList", bidangList);
             mm.addAttribute("search", search);
         } else {
             result = sopService.getAllSopListPaging(page);
         }
+        mm.addAttribute("bidangList", bidangList);
         mm.addAttribute("data", result);
 
         return "sop/list";
@@ -48,6 +62,7 @@ public class SopController{
     @GetMapping("/view")
     public String viewData(@RequestParam(value = "id") String id, ModelMap mm) {
         Sop sop = new Sop();
+        List<Bidang> bidangList = bidangDao.findAll();
         if (StringUtils.hasText(id)) {
             Optional<Sop> o = sopDao.findById(id);
             if (o.isPresent()) {
@@ -56,7 +71,7 @@ public class SopController{
         } else {
             return "redirect:/sop/list";
         }
-
+        mm.addAttribute("bidangList", bidangList);
         mm.addAttribute("sop", sop);
 
         return "sop/view";
@@ -72,6 +87,7 @@ public class SopController{
     @GetMapping("/form")
     public String showForm(@RequestParam(required = false) String id, ModelMap mm){
         Sop sop = new Sop();
+        List<Bidang> bidangList = bidangDao.findAll();
         if (StringUtils.hasText(id)){
             Optional<Sop> o = sopDao.findById(id);
             if (o.isPresent()) {
@@ -79,6 +95,7 @@ public class SopController{
             }
         }
         mm.addAttribute("sop", sop);
+        mm.addAttribute("bidangList", bidangList);
         return "sop/form";
     }
 

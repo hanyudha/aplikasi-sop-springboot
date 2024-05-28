@@ -23,6 +23,10 @@ public class Sop {
     @Column(name = "id", length = 36)
     private String id;
 
+    @ManyToOne
+    @JoinColumn(name = "id_bidang")
+    private Bidang bidang;
+
     @Column(name = "nomor_sop", columnDefinition = "text")
     private String nomorSop;
 
